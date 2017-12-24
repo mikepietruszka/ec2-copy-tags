@@ -1,4 +1,9 @@
 #!/usr/bin/env python
+'''
+Copy EC2 tags from a source instance to destination instance.
+
+..moduleauthor:: Mike Pietruszka <mike@mpietruszka.com>
+'''
 
 import boto3
 import sys
@@ -15,14 +20,14 @@ def copy_tags(region, src_instance_id, dst_instance_id):
         ec2_resource = session.resource('ec2')
 
     # Get source instance tags
-    instance_a = ec2_resource.Instance(src_instance_id)
-    instance_a_tags = instance_a.tags
+    src_instance = ec2_resource.Instance(src_instance_id)
+    src_instance_tags = src_instance.tags
 
     # Copy the source instance tags to destination instance
-    instance_b = ec2_resource.Instance(dst_instance_id)
-    instance_b.create_tags(
+    dst_instance = ec2_resource.Instance(dst_instance_id)
+    dst_instance.create_tags(
         DryRun=False,
-        Tags=instance_a_tags
+        Tags=src_instance_tags
     )
 
 
