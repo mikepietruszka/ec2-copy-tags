@@ -1,4 +1,9 @@
 #!/usr/bin/env python
+'''
+Copy EC2 tags from a source instance to destination instance.
+
+..moduleauthor:: Mike Pietruszka <mike@mpietruszka.com>
+'''
 
 import boto3
 import sys
